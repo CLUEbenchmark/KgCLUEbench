@@ -76,6 +76,9 @@
     │  ListAndList.py
     │  __init__.py
 
+## 算法排行
+
+
 ## 使用示例
 
 ### 以 **kg_qa** 算法为例
@@ -96,5 +99,7 @@
 > 在此目录下直接命名一个新的python包包含init和config文件
 > 不同算法可能有多个stage，不同stage建议使用独立的python包，多个stage共享一个config
 
+## UPDATE:
+  ******* 2021-12-3,新项目开荒
 ## 有问题联系1194370384@qq.com
 
