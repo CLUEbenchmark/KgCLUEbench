@@ -46,13 +46,6 @@
 │  │      vocab.txt
 │
 ├─raw_data # 数据集推荐添加方式,直接解压
-│  ├─clunner2020 # clunner2020的数据集
-│  │      data_processor_seq.py
-│  │      README.md
-│  │      test.json
-│  │      train.json
-│  │      valid.json
-│  │
 │  ├─kgClue # kg_qa项目中适配的数据集
 │  │  │  eval.json
 │  │  │  kgClue.yaml
@@ -62,12 +55,6 @@
 │  │  └─knowledge # 知识库
 │  │          Knowledge.txt
 │  │          README.md
-│  └─ske # 中文实体识别数据集
-│          all_50_schemas
-│          ske.yaml
-│          test.json
-│          train.json
-│          valid.json
 │
 └─utils
     │  DrawTrain.py
