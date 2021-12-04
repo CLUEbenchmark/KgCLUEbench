@@ -6,12 +6,14 @@
 # @Software: PyCharm
 
 # 假定已经带着正确的分类label去训练实体识别
+import sys
+
 import tensorflow as tf
 import os, math
-
+from seqeval.metrics import accuracy_score, f1_score
 from bert import modeling
 from bert import optimization
-from tensorflow import initializers
+from tensorflow.contrib.layers.python.layers import initializers
 from algorithm.kg_qa.config import Properties, LstmCRFConfig as config
 from algorithm.kg_qa.NER_BERT_LSTM_CRF.lstm_crf_layer import BLSTM_CRF
 from utils.IdAndLabel import id2label
@@ -47,8 +49,9 @@ def create_model(bert_config, is_training, input_ids, input_mask, segment_ids, l
                           num_layers=config.num_layers,
                           dropout_rate=config.droupout_rate, initializers=initializers, num_labels=num_labels,
                           seq_length=max_seq_length, labels=labels, lengths=lengths, is_training=is_training)
-    rst = blstm_crf.add_blstm_crf_layer(crf_only=False)
-    return rst
+    (total_loss, logits, trans, pred_ids) = blstm_crf.add_blstm_crf_layer(crf_only=False)
+
+    return (total_loss, logits, trans, pred_ids)
 
 
 def get_input_data(input_file, seq_length, batch_size, is_training=True):
@@ -131,10 +134,12 @@ def main():
     token_labels = tf.placeholder(tf.int64, shape=[None, seq_len], name='token_labels')
     keep_prob = tf.placeholder(tf.float32, name='keep_prob')  # , name='is_training'
     bert_config_ = load_bert_config(Properties.bert_config)
-    (total_loss, acc, logits, probabilities) = create_model(bert_config_, is_training, input_ids,
-                                                            input_mask, segment_ids, token_labels,
-                                                            keep_prob,
-                                                            num_labels, use_one_hot_embeddings)
+    # total_loss, logits, trans, pred_ids
+    (total_loss, logits, trans, pred_ids) = create_model(bert_config_, is_training, input_ids,
+                                                         input_mask, segment_ids, token_labels,
+                                                         keep_prob,
+                                                         num_labels, use_one_hot_embeddings)
+
     train_op = optimization.create_optimizer(total_loss, learning_rate, num_train_steps * config.num_train_epochs,
                                              num_warmup_steps, False)
 
@@ -172,10 +177,12 @@ def main():
                     segment_ids: segment,
                     token_labels: y,
                     keep_prob: 0.9}
-            _, out_loss, acc_, p_ = sess.run([train_op, total_loss, acc, probabilities], feed_dict=feed)
-            print("step :{},loss :{}, acc :{}".format(step, out_loss, acc_))
-            train_out_f.write("step :{}, loss :{},  acc :{} \n".format(step, out_loss, acc_))
-            return out_loss, p_, y
+            _, out_loss, pred_ids_ = sess.run([train_op, total_loss, pred_ids], feed_dict=feed)
+            acc = accuracy_score(pre2out(y), pre2out(pred_ids_))
+            f1 = f1_score(pre2out(y), pre2out(pred_ids_))
+            print("step :{},loss :{}, acc :{}, f1 :{}".format(step, out_loss, acc, f1))
+            train_out_f.write("step :{}, loss :{},  acc :{} , f1 :{} \n".format(step, out_loss, acc, f1))
+            return out_loss, pred_ids_, y
 
         def valid_step(ids, mask, segment, y):
             # 验证训练效果
@@ -185,8 +192,11 @@ def main():
                     token_labels: y,
                     keep_prob: 1.0
                     }
-            out_loss, acc_, p_ = sess.run([total_loss, acc, probabilities], feed_dict=feed)
-            print("loss :{}, acc :{}".format(out_loss, acc_))
+
+            out_loss, p_ = sess.run([total_loss, pred_ids], feed_dict=feed)
+            # f1 = f1_score(pre2out(y), pre2out(p_))
+            # acc = accuracy_score(pre2out(y), pre2out(p_))
+            # print("loss :{}, acc :{}, f1:{}".format(out_loss, acc, f1)) 没有必要一个批次算一次
             return out_loss, p_, y
 
         min_total_loss_dev = 999999
@@ -208,8 +218,6 @@ def main():
                     [input_ids2, input_mask2, segment_ids2, labels2])
                 out_loss, pre, y = train_step(ids_train, mask_train, segment_train, y_train, step, train_out_f)
                 total_loss_train += out_loss
-                break
-
 
                 if step % eval_per_step == 0 and step >= config.eval_start_step:
                     total_loss_dev = 0
@@ -217,16 +225,17 @@ def main():
                                                                                                     seq_len,
                                                                                                     valid_batch_size,
                                                                                                     False)
-
+                    pre_list = []
+                    y_list = []
                     for j in range(num_valid_steps):  # 一个 epoch 的 轮数
                         ids_dev, mask_dev, segment_dev, y_dev = sess.run(
                             [dev_input_ids2, dev_input_mask2, dev_segment_ids2, dev_labels2])
                         out_loss, pre, y = valid_step(ids_dev, mask_dev, segment_dev, y_dev)
                         total_loss_dev += out_loss
-                    # report a batch data in valid_data
-                    report(pre2out(y), pre2out(pre))
+                        pre_list.extend(pre)
+                        y_list.extend(y)
                     print("total_loss_dev:{}".format(total_loss_dev))
-                    # print(classification_report(total_true_dev, total_pre_dev, digits=4))
+                    report(pre2out(y_list), pre2out(pre_list))
 
                     if total_loss_dev < min_total_loss_dev:
                         print("save model:\t%f\t>%f" % (min_total_loss_dev, total_loss_dev))
@@ -234,7 +243,6 @@ def main():
                         saver.save(sess, config.model_out + 'bert.ckpt', global_step=step)
                 elif step < config.eval_start_step and step % config.auto_save == 0:
                     saver.save(sess, config.model_out + 'bert.ckpt', global_step=step)
-            break
             train_out_f.close()
             _ = "{:*^100s}".format(("epoch-" + str(epoch) + " report:").center(20))
             print("total_loss_train:{}".format(total_loss_train))

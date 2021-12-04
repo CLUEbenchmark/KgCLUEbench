@@ -304,7 +304,7 @@ class LstmCRFConfig(object):
     train_batch_size = 40
     valid_batch_size = 40
     num_train_epochs = 20
-    eval_start_step = 500
+    eval_start_step = 1000
     eval_per_step = 50
     auto_save = 50
 
