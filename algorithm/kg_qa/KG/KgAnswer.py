@@ -9,9 +9,9 @@ import os
 
 from elasticsearch import Elasticsearch
 
-from algorithm.kg_qa.NER.EntityExtract import EntityExtract
+from algorithm.kg_qa.NER_BERT_LSTM_CRF.EntityExtract import EntityExtract
 from algorithm.kg_qa.SIM.Predict import Predict as SimPredict
-from algorithm.kg_qa.config import Properties, NerConfig, SimConfig
+from algorithm.kg_qa.config import Properties, LstmCRFConfig, SimConfig
 
 
 class KgAnswer(object):
@@ -34,7 +34,7 @@ class KgAnswer(object):
             }
         }
 
-        es_results = self.es.search(index="kbqa-data", doc_type="kbList", body=body, size=30)
+        es_results = self.es.search(index="kbqa-data", doc_type="kbList", body=body, size=1000)
 
         attribute_list, answer_list = list(), list()
         for i in range(len(es_results['hits']['hits'])):
@@ -55,8 +55,8 @@ class KgAnswer(object):
 
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-    NER_MODEL_PATH = NerConfig.model_out
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    NER_MODEL_PATH = LstmCRFConfig.model_out
     SIM_MODEL_PATH = SimConfig.model_out
     es_host = "127.0.0.1"
     es_port = "9200"

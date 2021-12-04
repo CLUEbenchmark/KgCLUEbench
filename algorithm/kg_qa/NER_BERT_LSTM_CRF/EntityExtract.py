@@ -8,7 +8,7 @@ import json
 import os
 
 from bert import tokenization
-from algorithm.kg_qa.config import Properties, NerConfig as config
+from algorithm.kg_qa.config import Properties, LstmCRFConfig as config
 from algorithm.kg_qa.NER_BERT_LSTM_CRF.Predict import Predict
 
 
@@ -124,7 +124,7 @@ if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     MODEL_PATH = config.model_out
     ee = EntityExtract(MODEL_PATH)
-    # ff = open("./out.txt", 'w', encoding='utf-8')
+    ff = open("./out.txt", 'w', encoding='utf-8')
     true_count=0
     with open(r"C:\Users\11943\Documents\GitHub\KgClue_Bench\raw_data\kgClue\test_public.json", "r",
               encoding='utf-8') as f:
@@ -139,8 +139,8 @@ if __name__ == '__main__':
                 print(entity,"".join(p_entity))
                 if entity ==  "".join(p_entity):
                     true_count+=1
-                # ff.write(text + "\t" + entity + "\t" + "".join(p_entity) + "\n")
+                ff.write(text + "\t" + entity + "\t" + "".join(p_entity) + "\n")
             else:
                 break
-    # ff.close()
+    ff.close()
     print(true_count/2000)

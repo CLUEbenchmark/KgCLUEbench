@@ -8,8 +8,8 @@ import json
 import os
 
 from algorithm.kg_qa.NER_BERT_LSTM_CRF.Predict import Predict
-from algorithm.kg_qa.NER_BERT_LSTM_CRF.DataMaking import DataMaking
-from algorithm.kg_qa.config import NerConfig as config
+from algorithm.kg_qa.NER.DataMaking import DataMaking
+from algorithm.kg_qa.config import LstmCRFConfig as config
 from utils.EvalReport import report
 
 
@@ -53,7 +53,7 @@ class Eval(object):
 
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
     MODEL_PATH = config.model_out
     ner_eval = Eval(MODEL_PATH)
     ner_eval.do_eval(data_files=["raw_data/kgClue/test_public.json"])

@@ -6,6 +6,8 @@
 # @Software: PyCharm
 
 import os
+import sys
+
 import tensorflow as tf
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
@@ -14,6 +16,8 @@ from bert import tokenization
 from algorithm.kg_qa.NER.DataMaking import DataMaking
 from utils.IdAndLabel import id2label
 from algorithm.kg_qa.config import Properties, LstmCRFConfig as config
+
+
 # 预测类
 class Predict(object):
 
@@ -32,7 +36,10 @@ class Predict(object):
         self.segment_ids = self.sess.graph.get_tensor_by_name("segment_ids:0")
         self.keep_prob = self.sess.graph.get_tensor_by_name("keep_prob:0")
         # 预测的结果
-        self.p = self.sess.graph.get_tensor_by_name("loss/ReverseSequence_1:0")
+        self.p = self.sess.graph.get_tensor_by_name("ReverseSequence_1:0")
+
+        # x =[n.name for n in tf.get_default_graph().as_graph_def().node]
+        # print(x)
 
     def load_model(self):
         try:
