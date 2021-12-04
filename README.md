@@ -5,63 +5,63 @@
 
 ## 目录结构
 
-├─algorithm # 算法
-│  └─kg_qa # 算法开发示例
-│      │  config.py
-│      │  __init__.py
-│      │
-│      ├─KG 每个模块对应一个package
-│      │  │  es.py
-│      │  │  KgAnswer.py
-│      │  │  KgEval.py
-│      │  │  __init__.py
-│      │
-│      ├─NER 
-│      │  │  DataMaking.py
-│      │  │  EntityExtract.py
-│      │  │  Eval.py
-│      │  │  Predict.py
-│      │  │  TrainAndValid.py
-│      │  │  __init__.py
-│      │
-│      ├─SIM
-│      │  │  DataMaking.py
-│      │  │  Eval.py
-│      │  │  Predict.py
-│      │  │  TrainAndValid.py
-│      │  │  __init__.py
-│
-├─bert 谷歌官方Bert代码存放
-│  │  .gitignore
-│  │  __init__.py
-│
-├─pretraining_model # 存放bert的预训练模型
-│  │  readme.txt
-│  │
-│  ├─chinese_rbt3_L-3_H-768_A-12 #存放示例
-│  │      bert_config.json
-│  │      bert_model.ckpt.data-00000-of-00001
-│  │      bert_model.ckpt.index
-│  │      bert_model.ckpt.meta
-│  │      vocab.txt
-│
-├─raw_data # 数据集推荐添加方式,直接解压
-│  ├─kgClue # kg_qa项目中适配的数据集
-│  │  │  eval.json
-│  │  │  kgClue.yaml
-│  │  │  test_public.json
-│  │  │  train.json
-│  │  │
-│  │  └─knowledge # 知识库
-│  │          Knowledge.txt
-│  │          README.md
-│
-└─utils
-    │  DrawTrain.py
-    │  EvalReport.py
-    │  IdAndLabel.py
-    │  ListAndList.py
-    │  __init__.py
+├─algorithm # 算法 <br>
+│  └─kg_qa # 算法开发示例<br>
+│      │  config.py<br>
+│      │  __init__.py<br>
+│      │<br>
+│      ├─KG 每个模块对应一个package<br>
+│      │  │  es.py<br>
+│      │  │  KgAnswer.py<br>
+│      │  │  KgEval.py<br>
+│      │  │  __init__.py<br>
+│      │<br>
+│      ├─NER<br> 
+│      │  │  DataMaking.py<br>
+│      │  │  EntityExtract.py<br>
+│      │  │  Eval.py<br>
+│      │  │  Predict.py<br>
+│      │  │  TrainAndValid.py<br>
+│      │  │  __init__.py<br>
+│      │<br>
+│      ├─SIM<br>
+│      │  │  DataMaking.py<br>
+│      │  │  Eval.py<br>
+│      │  │  Predict.py<br>
+│      │  │  TrainAndValid.py<br>
+│      │  │  __init__.py<br>
+│<br>
+├─bert 谷歌官方Bert代码存放<br>
+│  │  .gitignore<br>
+│  │  __init__.py<br>
+│<br>
+├─pretraining_model # 存放bert的预训练模型<br>
+│  │  readme.txt<br>
+│  │<br>
+│  ├─chinese_rbt3_L-3_H-768_A-12 #存放示例<br>
+│  │      bert_config.json<br>
+│  │      bert_model.ckpt.data-00000-of-00001<br>
+│  │      bert_model.ckpt.index<br>
+│  │      bert_model.ckpt.meta<br>
+│  │      vocab.txt<br>
+│<br>
+├─raw_data # 数据集推荐添加方式,直接解压<br>
+│  ├─kgClue # kg_qa项目中适配的数据集<br>
+│  │  │  eval.json<br>
+│  │  │  kgClue.yaml<br>
+│  │  │  test_public.json<br>
+│  │  │  train.json<br>
+│  │  │<br>
+│  │  └─knowledge # 知识库<br>
+│  │          Knowledge.txt<br>
+│  │          README.md<br>
+│<br>
+└─utils<br>
+    │  DrawTrain.py<br>
+    │  EvalReport.py<br>
+    │  IdAndLabel.py<br>
+    │  ListAndList.py<br>
+    │  __init__.py<br>
 
 ## 算法排行
 | Model   | F1     | EM  |

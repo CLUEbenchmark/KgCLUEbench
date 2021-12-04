@@ -287,3 +287,44 @@ class NerConfig(object):
             self.segment_ids = segment_ids
             self.label_ids = label_ids
             self.is_real_example = is_real_example
+
+class LstmCRFConfig(object):
+    lstm_size=128
+    cell="lstm"
+    num_layers=1
+    droupout_rate=0.5
+
+    max_seq_length = 32
+    label_list = ["[Padding]", "[##WordPiece]", "[CLS]", "[SEP]", "B-NP", "I-NP", "O"]
+    train_data = os.path.join(Properties.TASK_DIR, "NER/data/train/train.tf_record")
+    valid_data = os.path.join(Properties.TASK_DIR, "NER/data/eval/eval.tf_record")
+
+    train_examples_len = 18000
+    valid_examples_len = 2000
+    train_batch_size = 40
+    valid_batch_size = 40
+    num_train_epochs = 20
+    eval_start_step = 500
+    eval_per_step = 50
+    auto_save = 50
+
+    learning_rate = 3e-5
+    warmup_proportion = 0.1
+    model_out = os.path.join(Properties.TASK_DIR, "NER_BERT_LSTM_CRF/model/")
+    training_log = os.path.join(Properties.TASK_DIR, "NER_BERT_LSTM_CRF/log/")
+    num_labels = len(label_list)
+
+    class InputFeatures(object):
+        """A single set of features of data."""
+
+        def __init__(self,
+                     input_ids,
+                     input_mask,
+                     segment_ids,
+                     label_ids,
+                     is_real_example=True):
+            self.input_ids = input_ids
+            self.input_mask = input_mask
+            self.segment_ids = segment_ids
+            self.label_ids = label_ids
+            self.is_real_example = is_real_example
