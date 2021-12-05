@@ -79,10 +79,11 @@
 > #### 不同预训练模型性能比较
 > pretraining_model | F1(NER) | F1(SIM)|
 >:----:| :----:  |:----:  |
+> bert-mini(L3)|
 > bert-base|
 > bert-large|
 > roberta|
-> roberta-large|
+> roberta-large|93.9|90.3|
 
 ## 使用示例
 
