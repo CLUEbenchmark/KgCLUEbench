@@ -33,8 +33,8 @@ class Predict(object):
         self.keep_prob = self.sess.graph.get_tensor_by_name("keep_prob:0")
         # 预测的结果
         self.p = self.sess.graph.get_tensor_by_name("loss/ReverseSequence_1:0")
-        x = [n.name for n in tf.get_default_graph().as_graph_def().node]
-        print(x)
+        # x = [n.name for n in tf.get_default_graph().as_graph_def().node]
+        # print(x)
 
     def load_model(self):
         try:

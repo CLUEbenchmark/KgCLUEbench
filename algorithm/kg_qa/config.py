@@ -291,7 +291,7 @@ class NerConfig(object):
 class LstmCRFConfig(object):
     lstm_size=128
     cell="lstm"
-    num_layers=2
+    num_layers=1
     droupout_rate=0.5
 
     max_seq_length = 32
@@ -304,7 +304,7 @@ class LstmCRFConfig(object):
     train_batch_size = 40
     valid_batch_size = 40
     num_train_epochs = 30
-    eval_start_step = 1000
+    eval_start_step = 500
     eval_per_step = 50
     auto_save = 50
 

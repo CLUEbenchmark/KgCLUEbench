@@ -8,7 +8,7 @@ import json
 import os
 
 from KgAnswer  import KgAnswer
-from algorithm.kg_qa.config import LstmCRFConfig, SimConfig
+from algorithm.kg_qa.config import NerConfig, SimConfig
 
 def normalize_text(s):
     """Removing articles and punctuation, and standardizing whitespace are all typical text processing steps."""
@@ -56,7 +56,7 @@ def compute_f1(prediction, truth):
 
 if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    NER_MODEL_PATH = LstmCRFConfig.model_out
+    NER_MODEL_PATH = NerConfig.model_out
     SIM_MODEL_PATH = SimConfig.model_out
     es_host = "127.0.0.1"
     es_port = "9200"
