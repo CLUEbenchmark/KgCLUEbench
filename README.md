@@ -82,7 +82,7 @@
 > bert-mini(L3)|
 > bert-base|
 > bert-large|
-> roberta|
+> roberta|92.3|91.2|
 > roberta-large|93.9|90.3|
 
 ## 使用示例
