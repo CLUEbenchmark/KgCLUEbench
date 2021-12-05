@@ -66,14 +66,23 @@
 
 ## 算法排行
 
-### kg_qa 以kgClue为训练数据集，旨在回答知识库中的问题
+### **kg_qa任务** 以kgClue为训练数据集，旨在回答知识库中的问题
 
-### 不同算法结构性能比较(以roberta—large为预训练模型)
+> #### 不同算法结构性能比较(以roberta—large为预训练模型)
+> 这里的评估是以问题回答准确度作为标准
+> 
+>Model   | F1     | EM  |
+>:----:| :----:  |:----:  |
+>bert-crf |  66.1       |  66.0    |
+>bert-lstm-crf |  63.9       |  63.6    |
 
-| Model   | F1     | EM  |
-| :----:| :----:  |:----:  |
-| bert-crf |  66.1       |  66.0    |
-| bert-lstm-crf |  63.9       |  63.6    |
+> #### 不同预训练模型性能比较
+> pretraining_model | F1(NER) | F1(SIM)|
+>:----:| :----:  |:----:  |
+> bert-base|
+> bert-large|
+> roberta|
+> roberta-large|
 
 ## 使用示例
 
