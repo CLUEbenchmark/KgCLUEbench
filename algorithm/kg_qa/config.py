@@ -15,8 +15,7 @@ from config import config as pro_config
 class Properties(object):
     TASK_DIR = os.path.dirname(__file__)
     PROJECT_DIR = pro_config.PROJECT_DIR
-    # model_source = os.path.join(PROJECT_DIR, "pretraining_model/chinese_roberta_wwm_ext_L-12_H-768_A-12")
-    model_source = os.path.join(PROJECT_DIR, "pretraining_model/chinese_rbt3_L-3_H-768_A-12")  # 切换模型测试
+    model_source = os.path.join(PROJECT_DIR, "pretraining_model/chinese_rbt3_L-3_H-768_A-12")
     vocab_file = os.path.join(model_source, "vocab.txt")
     bert_config = os.path.join(model_source, "bert_config.json")
     init_checkpoint = os.path.join(model_source, "bert_model.ckpt")
@@ -31,9 +30,9 @@ class SimConfig(object):
 
     train_examples_len = 129981
     valid_examples_len = 13912
-    train_batch_size = 64
-    valid_batch_size = 64
-    num_train_epochs = 20
+    train_batch_size = 40
+    valid_batch_size = 40
+    num_train_epochs = 5
     eval_start_step = 500
     eval_per_step = 100
     auto_save = 100
@@ -262,7 +261,7 @@ class NerConfig(object):
     valid_examples_len = 2000
     train_batch_size = 40
     valid_batch_size = 40
-    num_train_epochs = 20
+    num_train_epochs = 5
     eval_start_step = 500
     eval_per_step = 50
     auto_save = 50

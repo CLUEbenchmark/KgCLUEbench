@@ -11,7 +11,7 @@ from elasticsearch import Elasticsearch
 
 from algorithm.kg_qa.NER.EntityExtract import EntityExtract
 from algorithm.kg_qa.SIM.Predict import Predict as SimPredict
-from algorithm.kg_qa.config import Properties, NerConfig, SimConfig
+from algorithm.kg_qa.config import  NerConfig, SimConfig
 
 
 class KgAnswer(object):
