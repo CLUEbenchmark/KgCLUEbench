@@ -9,66 +9,36 @@
 ├─algorithm # 算法 <br>
 │ └─kg_qa # 算法开发示例<br>
 │ │ config.py<br>
-│ │  __init__.py<br>
-│ │<br>
 │ ├─KG 每个模块对应一个package<br>
 │ │ │ es.py<br>
 │ │ │ KgAnswer.py<br>
 │ │ │ KgEval.py<br>
-│ │ │  __init__.py<br>
-│ │<br>
 │ ├─NER<br>
 │ │ │ DataMaking.py<br>
 │ │ │ EntityExtract.py<br>
 │ │ │ Eval.py<br>
 │ │ │ Predict.py<br>
 │ │ │ TrainAndValid.py<br>
-│ │ │  __init__.py<br>
-│ │<br>
-│ ├─SIM<br>
-│ │ │ DataMaking.py<br>
-│ │ │ Eval.py<br>
-│ │ │ Predict.py<br>
-│ │ │ TrainAndValid.py<br>
-│ │ │  __init__.py<br>
-│<br>
 ├─bert 谷歌官方Bert代码存放<br>
 │ │ .gitignore<br>
-│ │  __init__.py<br>
-│<br>
 ├─pretraining_model # 存放bert的预训练模型<br>
-│ │ readme.txt<br>
-│ │<br>
 │ ├─chinese_rbt3_L-3_H-768_A-12 #存放示例<br>
-│ │ bert_config.json<br>
-│ │ bert_model.ckpt.data-00000-of-00001<br>
-│ │ bert_model.ckpt.index<br>
-│ │ bert_model.ckpt.meta<br>
-│ │ vocab.txt<br>
-│<br>
 ├─raw_data # 数据集推荐添加方式,直接解压<br>
 │ ├─kgClue # kg_qa项目中适配的数据集<br>
 │ │ │ eval.json<br>
 │ │ │ kgClue.yaml<br>
 │ │ │ test_public.json<br>
 │ │ │ train.json<br>
-│ │ │<br>
 │ │ └─knowledge # 知识库<br>
 │ │ Knowledge.txt<br>
-│ │ README.md<br>
-│<br>
 └─utils<br>
-│ DrawTrain.py<br>
-│ EvalReport.py<br>
-│ IdAndLabel.py<br>
-│ ListAndList.py<br>
-│  __init__.py<br>
+
 
 ## 算法排行
 
 ### **kg_qa任务** 以kgClue为训练数据集，旨在回答知识库中的问题
 
-> #### 不同算法结构性能比较(以roberta—large为预训练模型)
+> #### 不同算法结构性能比较(以roberta为预训练模型)
 > 这里的评估是以问题回答准确度作为标准
 > 
 >Model   | F1     | EM  |
@@ -76,14 +46,26 @@
 >bert-crf |  66.1       |  66.0    |
 >bert-lstm-crf |  63.9       |  63.6    |
 
-> #### 不同预训练模型性能比较
-> pretraining_model | F1(NER) | F1(SIM)|
->:----:| :----:  |:----:  |
-> bert-mini(L3)|92.3|91.2|
-> bert-base|
-> bert-large|
-> roberta|93.9|90.3|
-> roberta-large|xx|xx|
+#### 不同预训练模型性能比较(不代表每个模型的最佳性能)
+NER (bert+crf) seq_lan=32 epoch=5
+
+| pretraining_model      | batch | micro-f1| macro-f1| f1(##WordPiece) |f1(B-NP/I-NP)|
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| chinese_rbt3_L-3_H-768_A-12      | 40       | 93.1| 88.0 | 61.0 | 79.0 |
+| chinese_rbt4_L-4_H-768_A-12   | 40        | 92.0 | 87.0 | 62.0 | 75.0 |
+| chinese_rbt6_L-6_H-768_A-12   | 40        | 93.0 | 88.0 | 61.0 | 77.0 |
+| chinese_rbtl3_L-3_H-1024_A-16   | 40       | 93.0 | 89.0 | 66.0 | 77.0 | 
+| chinese_wwm_ext_L-12_H-768_A-12   | 40       | 93.0 | 88.0 | 63.0 | 77.0 | 
+
+SIM (bert) seq_lan=64 epoch=5
+
+| pretraining_model      | batch | accuracy| precision| recall |macro-f1|
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| chinese_rbt3_L-3_H-768_A-12      | 40       | 86.0| 44.3 | 2.0 | 49.0 |
+| chinese_rbt4_L-4_H-768_A-12   | 40        | 93.5 | 78.3 | 73.1 | 85.9 |
+| chinese_rbt6_L-6_H-768_A-12   | 40        | 93.8 | 79.2 | 74.9 | 86.7 |
+| chinese_rbtl3_L-3_H-1024_A-16   | 40       |96.5 |86.4| 89.1| 92.9 | 
+| chinese_wwm_ext_L-12_H-768_A-12   | 40       | 95.5| 82.1| 86.6 | 90.9 | 
 
 ## 使用示例
 
