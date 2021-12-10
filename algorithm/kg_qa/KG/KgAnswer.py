@@ -11,7 +11,7 @@ from elasticsearch import Elasticsearch
 
 from algorithm.kg_qa.NER.EntityExtract import EntityExtract
 from algorithm.kg_qa.SIM.Predict import Predict as SimPredict
-from algorithm.kg_qa.config import  NerConfig, SimConfig
+from algorithm.kg_qa.config import NerConfig, SimConfig
 
 
 class KgAnswer(object):
@@ -43,15 +43,18 @@ class KgAnswer(object):
             attribute_list.append(relation)
             answer_list.append(value)
         best_answer = ""
+        best_attribute = ""
         probs_init = 0
         for attribute, answer in zip(attribute_list, answer_list):
-            isAttribute, probs = self.sim.predict_one(sentence, attribute, TEST_MODE=True)
-            if isAttribute:
-                # print("问题：%s，属性：%s,回答：%s" % (sentence, attribute, answer))
+            if attribute:
+                isAttribute, probs = self.sim.predict_one(sentence, attribute, TEST_MODE=True)
+                # if isAttribute:
+                #     # print("问题：%s，属性：%s,回答：%s" % (sentence, attribute, answer))
                 if probs[0][1] > probs_init:
                     best_answer = answer
+                    best_attribute = attribute
                     probs_init = probs[0][1]
-        return best_answer
+        return best_answer, best_attribute, entitys
 
 
 if __name__ == '__main__':

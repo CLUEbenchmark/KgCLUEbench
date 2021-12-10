@@ -15,7 +15,7 @@ from config import config as pro_config
 class Properties(object):
     TASK_DIR = os.path.dirname(__file__)
     PROJECT_DIR = pro_config.PROJECT_DIR
-    model_source = os.path.join(PROJECT_DIR, "pretraining_model/chinese_rbtl3_L-3_H-1024_A-16")
+    model_source = os.path.join(PROJECT_DIR, "pretraining_model/chinese_rbt6_L-6_H-768_A-12")
     vocab_file = os.path.join(model_source, "vocab.txt")
     bert_config = os.path.join(model_source, "bert_config.json")
     init_checkpoint = os.path.join(model_source, "bert_model.ckpt")

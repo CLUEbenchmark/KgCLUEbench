@@ -63,7 +63,7 @@ if __name__ == '__main__':
     kg = KgAnswer(NER_MODEL_PATH, SIM_MODEL_PATH, es_host, es_port)
     em_score = 0
     f1_score = 0
-    with open(r"C:\Users\11943\Documents\GitHub\KgClue_Bench\raw_data\kgClue\test_public.json", 'r', encoding='utf-8') as f:
+    with open(r"C:\Users\11943\Documents\GitHub\KgCLUEbench\raw_data\kgClue\test_public.json", 'r', encoding='utf-8') as f:
         count_number = 0
         while True:
 

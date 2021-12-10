@@ -60,7 +60,7 @@ if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # 使用不存在的显卡预测即用cpu
     MODEL_PATH = config.model_out
     sim_eval = Eval(MODEL_PATH)
-    sim_eval.do_eval(data_files=[r"C:\Users\11943\Documents\GitHub\KgClue_Bench\algorithm\kg_qa\SIM\data\test_public\token_label.txt"])
+    sim_eval.do_eval(data_files=[r"C:\Users\11943\Documents\GitHub\KgCLUEbench\algorithm\kg_qa\SIM\data\test_public\token_label.txt"])
     # y = [True,False,False,True,False]
     # p = [False,False,False,True,True]
     # macro  =f1_score(y, p, average='macro', zero_division=1)
