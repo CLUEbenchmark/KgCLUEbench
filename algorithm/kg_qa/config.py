@@ -15,14 +15,14 @@ from config import config as pro_config
 class Properties(object):
     TASK_DIR = os.path.dirname(__file__)
     PROJECT_DIR = pro_config.PROJECT_DIR
-    model_source = os.path.join(PROJECT_DIR, "pretraining_model/chinese_rbt6_L-6_H-768_A-12")
+    model_source = os.path.join(PROJECT_DIR, "pretraining_model/chinese_rbtl3_L-3_H-1024_A-16")
     vocab_file = os.path.join(model_source, "vocab.txt")
     bert_config = os.path.join(model_source, "bert_config.json")
     init_checkpoint = os.path.join(model_source, "bert_model.ckpt")
 
 
 class SimConfig(object):
-    max_seq_length = 64
+    max_seq_length = 128
     task_name = "SIM"
 
     train_data = os.path.join(Properties.TASK_DIR, task_name, "data/train/train.tf_record")
@@ -32,7 +32,7 @@ class SimConfig(object):
     valid_examples_len = 13912
     train_batch_size = 40
     valid_batch_size = 40
-    num_train_epochs = 5
+    num_train_epochs = 20
     eval_start_step = 500
     eval_per_step = 100
     auto_save = 100
@@ -252,7 +252,7 @@ class SimConfig(object):
 
 
 class NerConfig(object):
-    max_seq_length = 32
+    max_seq_length = 128
     label_list = ["[Padding]", "[##WordPiece]", "[CLS]", "[SEP]", "B-NP", "I-NP", "O"]
     train_data = os.path.join(Properties.TASK_DIR, "NER/data/train/train.tf_record")
     valid_data = os.path.join(Properties.TASK_DIR, "NER/data/eval/eval.tf_record")

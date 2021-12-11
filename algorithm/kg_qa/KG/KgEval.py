@@ -73,8 +73,9 @@ if __name__ == '__main__':
                 line = json.loads(line)
                 sentence = line["question"]
                 answer = line["answer"].split("|||")[2].strip()
-                p_answers = kg.answer(sentence)
+                p_answers,_,_ = kg.answer(sentence)
                 # print(answer,p_answers)
+
                 em_score += compute_exact_match(p_answers, answer)
                 f1_score += compute_f1(p_answers, answer)
 
