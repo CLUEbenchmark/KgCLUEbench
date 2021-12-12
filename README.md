@@ -81,7 +81,13 @@ SIM (bert) seq_lan=64 epoch=5
 4. 执行Eval.py 得出模型的评估结果,可以在训练时间断Eval模型,查看训练效果
 5. 执行EntityExtract.py 将序列标注结果(Predict结果)转化为句子中的实体
 
-#### SIM KG同理
+#### SIM 同理
+
+#### KG
+1. es.py是将知识库（这里是Knowledge.txt）导入es系统的脚本文件，只需要执行一次
+2. KgAnswer.py是回答问题的类，只需要输入一个句子，即可给出结果
+3. KgEval是评估问题回答能力的代码，修改文件路径即可使用
+4. KgPredict是回答test.json的代码，运行完成可以生成kgclue_predict.txt，用户压缩成zip文件之后可以直接提交至clue官网。
 
 ## algorithm 贡献方法
 
@@ -91,6 +97,7 @@ SIM (bert) seq_lan=64 epoch=5
 ## UPDATE
 
 ******* 2021-12-3,新项目开荒
+******* 2021-12-12,完整流程测试通过
 
 ## 有问题联系1194370384@qq.com
 
