@@ -78,10 +78,15 @@ SIM (bert) seq_lan=64 epoch=5
 1. 执行DataMaking.py **注意**: 1. 文件路径 2.脚本work路径,应该以整个KgCLUEBench为项目根目录运行
 2. 执行TrainAndValid.py **注意** :训练之前设置好kg_qa目录下的config配置,其他注意点同上
 3. 执行Precit.py 验证是否正常运行
-4. 执行Eval.py 得出模型的评估结果,可以在训练时间断Eval模型,查看训练效果
+4. 执行Eval.py 得出模型的评估结果,可以在训练时间段Eval模型,查看训练效果
 5. 执行EntityExtract.py 将序列标注结果(Predict结果)转化为句子中的实体
 
 #### SIM 同理
+
+1. 执行DataMaking.py **注意**: 1. 文件路径 2.脚本work路径,应该以整个KgCLUEBench为项目根目录运行
+2. 执行TrainAndValid.py **注意** :训练之前设置好kg_qa目录下的config配置,其他注意点同上
+3. 执行Precit.py 验证是否正常运行
+4. 执行Eval.py 得出模型的评估结果,可以在训练时间段Eval模型,查看训练效果
 
 #### KG
 1. es.py是将知识库（这里是Knowledge.txt）导入es系统的脚本文件，只需要执行一次
