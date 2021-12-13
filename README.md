@@ -10,25 +10,23 @@
 │ └─kg_qa # 算法开发示例<br>
 │ │ config.py<br>
 │ ├─KG 每个模块对应一个package<br>
-│ │ │ es.py<br>
-│ │ │ KgAnswer.py<br>
-│ │ │ KgEval.py<br>
+│ │ │ es.py # 将知识库导入es的脚本<br>
+│ │ │ KgAnswer.py # 回答问题类<br>
+│ │ │ KgEval.py# 回答问题的准确度评估方法<br> 
+│ │ │ KgPredict.py# 针对test.json文件生成预测结果，手动压缩之后可以提交到官网进行评估<br> 
 │ ├─NER<br>
-│ │ │ DataMaking.py<br>
-│ │ │ EntityExtract.py<br>
-│ │ │ Eval.py<br>
-│ │ │ Predict.py<br>
-│ │ │ TrainAndValid.py<br>
+│ │ │ DataMaking.py# NER训练数据集的制作脚本<br> 
+│ │ │ EntityExtract.py# 将序列标注标签转化为实体<br>
+│ │ │ Eval.py# 评估代码（输出f1）<br> 
+│ │ │ Predict.py# 预测类<br> 
+│ │ │ TrainAndValid.py# 训练代码<br>
 ├─bert 谷歌官方Bert代码存放<br>
 │ │ .gitignore<br>
 ├─pretraining_model # 存放bert的预训练模型<br>
 │ ├─chinese_rbt3_L-3_H-768_A-12 #存放示例<br>
 ├─raw_data # 数据集推荐添加方式,直接解压<br>
 │ ├─kgClue # kg_qa项目中适配的数据集<br>
-│ │ │ eval.json<br>
-│ │ │ kgClue.yaml<br>
-│ │ │ test_public.json<br>
-│ │ │ train.json<br>
+│ │ │ xxx.json<br>
 │ │ └─knowledge # 知识库<br>
 │ │ Knowledge.txt<br>
 └─utils<br>
@@ -75,18 +73,18 @@ SIM (bert) seq_lan=64 epoch=5
 
 #### NER
 
-1. 执行DataMaking.py **注意**: 1. 文件路径 2.脚本work路径,应该以整个KgCLUEBench为项目根目录运行
-2. 执行TrainAndValid.py **注意** :训练之前设置好kg_qa目录下的config配置,其他注意点同上
-3. 执行Precit.py 验证是否正常运行
-4. 执行Eval.py 得出模型的评估结果,可以在训练时间段Eval模型,查看训练效果
-5. 执行EntityExtract.py 将序列标注结果(Predict结果)转化为句子中的实体
+1. python DataMaking.py **注意**: 1. 文件路径 2.脚本work路径,应该以整个KgCLUEBench为项目根目录运行
+2. python TrainAndValid.py **注意** :训练之前设置好kg_qa目录下的config配置,其他注意点同上
+3. python Precit.py 验证是否正常运行
+4. python Eval.py 得出模型的评估结果,可以在训练时间段Eval模型,查看训练效果
+5. python EntityExtract.py 将序列标注结果(Predict结果)转化为句子中的实体
 
 #### SIM 同理
 
-1. 执行DataMaking.py **注意**: 1. 文件路径 2.脚本work路径,应该以整个KgCLUEBench为项目根目录运行
-2. 执行TrainAndValid.py **注意** :训练之前设置好kg_qa目录下的config配置,其他注意点同上
-3. 执行Precit.py 验证是否正常运行
-4. 执行Eval.py 得出模型的评估结果,可以在训练时间段Eval模型,查看训练效果
+1. python DataMaking.py **注意**: 1. 文件路径 2.脚本work路径,应该以整个KgCLUEBench为项目根目录运行
+2. python TrainAndValid.py **注意** :训练之前设置好kg_qa目录下的config配置,其他注意点同上
+3. python Precit.py 验证是否正常运行
+4. python Eval.py 得出模型的评估结果,可以在训练时间段Eval模型,查看训练效果
 
 #### KG
 1. es.py是将知识库（这里是Knowledge.txt）导入es系统的脚本文件，只需要执行一次
