@@ -28,8 +28,8 @@ class SimConfig(object):
     train_data = os.path.join(Properties.TASK_DIR, task_name, "data/train/train.tf_record")
     valid_data = os.path.join(Properties.TASK_DIR, task_name, "data/eval/eval.tf_record")
 
-    train_examples_len = 129981
-    valid_examples_len = 13912
+    train_examples_len = 63737
+    valid_examples_len = 6857
     train_batch_size = 40
     valid_batch_size = 40
     num_train_epochs = 20
@@ -259,9 +259,9 @@ class NerConfig(object):
 
     train_examples_len = 18000
     valid_examples_len = 2000
-    train_batch_size = 40
-    valid_batch_size = 40
-    num_train_epochs = 5
+    train_batch_size = 32
+    valid_batch_size = 32
+    num_train_epochs = 20
     eval_start_step = 500
     eval_per_step = 50
     auto_save = 50

@@ -55,7 +55,7 @@ def compute_f1(prediction, truth):
 
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
     NER_MODEL_PATH = NerConfig.model_out
     SIM_MODEL_PATH = SimConfig.model_out
     es_host = "127.0.0.1"

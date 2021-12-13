@@ -1,0 +1,4 @@
+tensorflow==1.15.4
+tensorflow-gpu==1.15.4
+requests==2.23.0
+python>=3.6

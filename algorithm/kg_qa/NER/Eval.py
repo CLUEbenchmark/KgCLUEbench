@@ -53,7 +53,7 @@ class Eval(object):
 
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
     MODEL_PATH = config.model_out
     ner_eval = Eval(MODEL_PATH)
     ner_eval.do_eval(data_files=["raw_data/kgClue/test_public.json"])

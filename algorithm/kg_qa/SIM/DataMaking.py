@@ -221,7 +221,7 @@ class DataMaking(object):
 if __name__ == '__main__':
     INPUT_DATA_PATHS = ["raw_data/kgClue/train.json", "raw_data/kgClue/eval.json", "raw_data/kgClue/test_public.json"]
     OUTPUT_DIR = "./data"
-    fake_example_nums = 5
+    fake_example_nums = 2 # 会影响sim模型数据集的个数需要及时更新config里面的值
     es_host = "127.0.0.1"
     es_port = "9200"
     sim_data_make = DataMaking(fake_example_nums, es_host, es_port, do_lower_case=True,
